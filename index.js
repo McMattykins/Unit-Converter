@@ -9,7 +9,7 @@ let lengthEl = document.getElementById("length-el");
 let volumeEl = document.getElementById("volume-el");
 let massEl = document.getElementById("mass-el");
 let inputEl = document.getElementById("input-el");
-let unitValue = 1; //Adjust to change number converted. Will add input for this later.
+let unitValue = 1;
 
 //Coefficients for conversions
 let m2ft = 3.28084;
@@ -22,7 +22,7 @@ convertion();
 
 //Update the value on key up
 inputEl.onchange = function () {
-  if (this.value === NaN || this.value < 0) {
+  if (this.value === "" || this.value < 0) {
     return;
   }
   unitValue = parseFloat(this.value);

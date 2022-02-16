@@ -8,24 +8,37 @@ let unitEl = document.getElementById("unit-el");
 let lengthEl = document.getElementById("length-el");
 let volumeEl = document.getElementById("volume-el");
 let massEl = document.getElementById("mass-el");
-let unitValue = 20; //Adjust to change number converted. Will add input for this later.
+let inputEl = document.getElementById("input-el");
+let unitValue = 1; //Adjust to change number converted. Will add input for this later.
 
 //Coefficients for conversions
 let m2ft = 3.28084;
 let l2gal = 0.2199692;
 let kg2lb = 2.204623;
 
-//Results all reduced to 3 decimal places
-let feet = (unitValue * m2ft).toFixed(3);
-let meters = (unitValue / m2ft).toFixed(3);
-let gallons = (unitValue * l2gal).toFixed(3);
-let liters = (unitValue / l2gal).toFixed(3);
-let kilograms = (unitValue * kg2lb).toFixed(3);
-let pounds = (unitValue / kg2lb).toFixed(3);
-
+//Initialize
 unitEl.textContent = unitValue;
+convertion();
+
+//Update the value on key up
+inputEl.onchange = function () {
+  if (this.value === NaN || this.value < 0) {
+    return;
+  }
+  unitValue = parseFloat(this.value);
+  console.log(typeof unitValue, unitValue);
+  unitEl.textContent = unitValue;
+  convertion();
+};
 
 function convertion() {
+  //Calculates and results all reduced to 3 decimal places
+  let feet = (unitValue * m2ft).toFixed(3);
+  let meters = (unitValue / m2ft).toFixed(3);
+  let gallons = (unitValue * l2gal).toFixed(3);
+  let liters = (unitValue / l2gal).toFixed(3);
+  let kilograms = (unitValue * kg2lb).toFixed(3);
+  let pounds = (unitValue / kg2lb).toFixed(3);
   //Updates the length convertions and conjugates units
   lengthEl.textContent = `
         ${unitValue} ${unitValue === 1 ? "meter" : "meters"} = 
@@ -48,5 +61,3 @@ function convertion() {
         ${kilograms} ${kilograms === 1 ? "kilogram" : "kilograms"} 
         `;
 }
-
-convertion();
